@@ -1,0 +1,2981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIRGO GWAPO</title>
+</head>
+    <style>
+        *, body{ 
+            margin: 0;
+            color: #454681;
+        }
+        body {
+            background-color: whitesmoke;
+            overflow: hidden;
+        }
+        .nav {
+            top: 0;
+            position: fixed;
+            height: 60px;
+            margin: 0;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgb(239, 239, 247);
+            background-color: rgb(249, 248, 255);
+        }
+        select, .show_data, .show_all, #month{
+            font-weight: bolder;
+            background-color: rgb(249, 248, 255);
+            margin: 0;
+            width: 200px;
+            text-align: center;
+            font-size: 20px;
+            border: none;
+            height: 60px;
+         
+        }
+        select:hover, .show_data:hover , .show_all:hover{
+            background-color: whitesmoke;
+            height: 100%;
+            color: black;
+            border-left: 1px solid rgb(223, 221, 238);
+            border-bottom: 1px solid rgb(223, 221, 238);
+            cursor: pointer;
+        }
+
+        #month:hover{
+            border-left: 1px solid rgb(223, 221, 238);
+            border-bottom: 1px solid rgb(223, 221, 238);
+            background-color: whitesmoke;
+            cursor: pointer;
+        }
+
+        .group_five{
+            visibility: hidden;
+            margin-top: 100px;
+        }
+
+        .display_greetings{
+            text-align: center;
+            width: 100%;
+            position: fixed;
+            top: 300px;
+            font-size: 100px;
+        }
+        .welcome {
+            border-bottom: 1px solid rgb(223, 221, 238);
+        }
+        
+        .setting_group{
+            visibility: hidden;
+            position: fixed;
+            top: 80px;
+            right: 20px ;
+        }
+        .print_data, .refresh_data {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 50%;
+            border: 2px solid rgb(223, 221, 238);
+            background-color: rgb(249, 248, 255);
+        }
+        
+        img {
+            height: 30px;
+            width: 30px;
+        }
+
+        .print_data:hover, .refresh_data:hover{
+            cursor: pointer;
+            background-color: #eeeff7;
+            border: 1px solid rgb(192, 189, 214);
+        }
+        
+        .help_group {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+        #help {
+            color: #cdcddd;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-left: 12px;
+            padding-right: 12px;
+            border-radius: 50%;
+            border: 2px solid rgb(223, 221, 238);
+            background-color: rgb(249, 248, 255);
+            font-size: 30px;
+            font-weight: bolder;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 5px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        #help:hover{
+            cursor: pointer;
+            background-color: #d3cede;
+            color: white;
+            border-color: white;
+        }
+    
+    </style>
+
+
+<body class="body">
+    <!--NAV BAR-->
+    <div class="nav" id="nav">
+        <!--SELECT MONTH-->
+        
+        
+            <!--SELECT COUNTER-->
+            <select name="" id="sel_bycounter" onchange="Select();">
+                <option selected value="Counter">Counter</option>
+            </select>
+            <!--SELECT GROUP-->
+            <select onchange="Select();" id="counter_sel" >
+                <option value="" selected>Group</option>
+                <option value="_354">C# 350-354</option>
+                <option value="_359">C# 355-359</option>
+                <option value="_364">C# 360-364</option>
+                <option value="_370">C# 365-370</option>
+            </select>
+            <!--SHOW BUTTON-->
+            
+            <button class="show_data" onclick="showData();">Show</button>
+            <button class="show_all" onclick="showAll()">All Counters</button>
+      
+    </div>
+
+    <!-- C R E A T E   S E T T I N G -->
+    <div class="setting_group">
+        <!-- REFRESH BUTTON -->
+        <button class="refresh_data" onclick="location.reload();"><img src="./icons/icons8-refresh-32.png" alt=""></button><br>
+        <!--PRINT BUTTON-->
+        <button class="print_data" onclick="window.print();"><img src="./icons/icons8-print-26.png" alt=""></button>
+    </div>
+
+    <!-- C R E A T E  H E L P -->
+    <div class="help_group">
+        <button id="help" onclick="Help();"> ? </button>
+    </div>
+
+
+    <!-- B A C K E N D  F O R  S H O W D A T A -->
+    <script>
+        function Help(){
+            alert('Please contact Virgo for help.')
+        }
+        //alert("Welcome to COUNTER A_B \n by VIRGO GWAPO XD")
+        function showData(){
+            var help_group = document.querySelector('.help_group').style.visibility ='hidden';
+            var show_data = document.querySelector('.group_five').style.visibility = 'visible';
+            var body = document.querySelector('.body').style.overflow = 'visible';
+            var display_greetings = document.querySelector('.display_greetings').style.visibility = 'hidden';
+            var setting_group = document.querySelector('.setting_group').style.visibility = 'visible';
+            var body = document.querySelector('body').style.backgroundColor = '#d3cede';
+
+            var input = document.getElementById('month').value;
+            input.toString();
+            var slice = input.slice(5, );
+            var month_n = Number(slice);
+            
+            if (month_n == 0){
+                alert('Please select Month in Calendar to Show data.');
+                location.reload();
+            }
+            
+            else if (sel_bycounter.value == 'Counter' && counter_sel.value == ''){
+                alert('Please select Counter or Group Counters to show data.');
+                location.reload();
+            }
+            else if (sel_bycounter.value != 'Counter' && counter_sel.value != ''){
+                alert('Please select only one for Counter or Group.');
+                location.reload();
+            }
+            
+        }
+        
+    </script>
+
+    <!--DISPLAY WELCOME-->
+    <div class="display_greetings">
+        <h1 class="welcome">WELCOME!</h1>
+        <h1 >COUNTER A B</h1>
+    </div>
+
+    <!--DISPLAY FIVE COUNTER A_B-TABLE-->
+    <div class="group_five">
+    <!--display table of all counters-->
+        <table class="tb1">
+            <!--COUNTER A C1-->
+            <tr>
+                <td class="td"></td><td class="td"></td><td class="td"></td><td class="td"></td>
+            </tr>
+            <tr>
+                <td class="td"></td><td class="td"></td><td class="td"></td><td class="td"></td>
+            </tr>
+            <tr>
+                <td class="td"></td><td class="td"></td><td class="td"></td><td class="td"></td>
+            </tr>
+            <tr>
+                <td class="td"></td><td class="td"></td><td class="td"></td><td class="td"></td>
+            </tr>
+            <tr>
+                <td class="td"></td><td class="td"></td><td class="td"></td><td class="td"></td>
+            </tr>
+            <tr>
+                <td class="td"></td><td class="td"></td><td class="td"></td><td class="td"></td>
+            </tr>
+            <tr>
+                <td class="td"></td><td class="td"></td><td class="td"></td><td class="td"></td>
+            </tr>
+            <tr>
+                <td class="td"></td><td class="td"></td><td class="td"></td>
+            </tr>
+            <!--COUNTER B C1-->
+            <tr>
+                <td class="td"></td><td class="td"></td><td class="td"></td><td class="td"></td>
+            </tr>
+            <tr>
+                <td class="td"></td><td class="td"></td><td class="td"></td><td class="td"></td>
+            </tr>
+            <tr>
+                <td class="td"></td><td class="td"></td><td class="td"></td><td class="td"></td>
+            </tr>
+            <tr>
+                <td class="td"></td><td class="td"></td><td class="td"></td><td class="td"></td>
+            </tr>
+            <tr>
+                <td class="td"></td><td class="td"></td><td class="td"></td><td class="td"></td>
+            </tr>
+            <tr>
+                <td class="td"></td><td class="td"></td><td class="td"></td><td class="td"></td>
+            </tr>
+            <tr>
+                <td class="td"></td><td class="td"></td><td class="td"></td><td class="td"></td>
+            </tr>
+            <tr>
+                <td class="td"></td><td class="td"></td><td class="td"></td>
+            </tr>
+        </table>
+
+        <table class="tb2">
+            <!--COUNTER A C1-->
+            <tr>
+                <td class="td2"></td><td class="td2"></td><td class="td2"></td><td class="td2"></td>
+            </tr>
+            <tr>
+                <td class="td2"></td><td class="td2"></td><td class="td2"></td><td class="td2"></td>
+            </tr>
+            <tr>
+                <td class="td2"></td><td class="td2"></td><td class="td2"></td><td class="td2"></td>
+            </tr>
+            <tr>
+                <td class="td2"></td><td class="td2"></td><td class="td2"></td><td class="td2"></td>
+            </tr>
+            <tr>
+                <td class="td2"></td><td class="td2"></td><td class="td2"></td><td class="td2"></td>
+            </tr>
+            <tr>
+                <td class="td2"></td><td class="td2"></td><td class="td2"></td><td class="td2"></td>
+            </tr>
+            <tr>
+                <td class="td2"></td><td class="td2"></td><td class="td2"></td><td class="td2"></td>
+            </tr>
+            <tr>
+                <td class="td2"></td><td class="td2"></td><td class="td2"></td>
+            </tr>
+            <!--COUNTER B C1-->
+            <tr>
+                <td class="td2"></td><td class="td2"></td><td class="td2"></td><td class="td2"></td>
+            </tr>
+            <tr>
+                <td class="td2"></td><td class="td2"></td><td class="td2"></td><td class="td2"></td>
+            </tr>
+            <tr>
+                <td class="td2"></td><td class="td2"></td><td class="td2"></td><td class="td2"></td>
+            </tr>
+            <tr>
+                <td class="td2"></td><td class="td2"></td><td class="td2"></td><td class="td2"></td>
+            </tr>
+            <tr>
+                <td class="td2"></td><td class="td2"></td><td class="td2"></td><td class="td2"></td>
+            </tr>
+            <tr>
+                <td class="td2"></td><td class="td2"></td><td class="td2"></td><td class="td2"></td>
+            </tr>
+            <tr>
+                <td class="td2"></td><td class="td2"></td><td class="td2"></td><td class="td2"></td>
+            </tr>
+            <tr>
+                <td class="td2"></td><td class="td2"></td><td class="td2"></td>
+            </tr>
+        </table>
+
+        <table class="tb3">
+            <!--COUNTER A C1-->
+            <tr>
+                <td class="td3"></td><td class="td3"></td><td class="td3"></td><td class="td3"></td>
+            </tr>
+            <tr>
+                <td class="td3"></td><td class="td3"></td><td class="td3"></td><td class="td3"></td>
+            </tr>
+            <tr>
+                <td class="td3"></td><td class="td3"></td><td class="td3"></td><td class="td3"></td>
+            </tr>
+            <tr>
+                <td class="td3"></td><td class="td3"></td><td class="td3"></td><td class="td3"></td>
+            </tr>
+            <tr>
+                <td class="td3"></td><td class="td3"></td><td class="td3"></td><td class="td3"></td>
+            </tr>
+            <tr>
+                <td class="td3"></td><td class="td3"></td><td class="td3"></td><td class="td3"></td>
+            </tr>
+            <tr>
+                <td class="td3"></td><td class="td3"></td><td class="td3"></td><td class="td3"></td>
+            </tr>
+            <tr>
+                <td class="td3"></td><td class="td3"></td><td class="td3"></td>
+            </tr>
+            <!--COUNTER B C1-->
+            <tr>
+                <td class="td3"></td><td class="td3"></td><td class="td3"></td><td class="td3"></td>
+            </tr>
+            <tr>
+                <td class="td3"></td><td class="td3"></td><td class="td3"></td><td class="td3"></td>
+            </tr>
+            <tr>
+                <td class="td3"></td><td class="td3"></td><td class="td3"></td><td class="td3"></td>
+            </tr>
+            <tr>
+                <td class="td3"></td><td class="td3"></td><td class="td3"></td><td class="td3"></td>
+            </tr>
+            <tr>
+                <td class="td3"></td><td class="td3"></td><td class="td3"></td><td class="td3"></td>
+            </tr>
+            <tr>
+                <td class="td3"></td><td class="td3"></td><td class="td3"></td><td class="td3"></td>
+            </tr>
+            <tr>
+                <td class="td3"></td><td class="td3"></td><td class="td3"></td><td class="td3"></td>
+            </tr>
+            <tr>
+                <td class="td3"></td><td class="td3"></td><td class="td3"></td>
+            </tr>
+        </table>
+
+        <table class="tb4">
+            <!--COUNTER A C1-->
+            <tr>
+                <td class="td4"></td><td class="td4"></td><td class="td4"></td><td class="td4"></td>
+            </tr>
+            <tr>
+                <td class="td4"></td><td class="td4"></td><td class="td4"></td><td class="td4"></td>
+            </tr>
+            <tr>
+                <td class="td4"></td><td class="td4"></td><td class="td4"></td><td class="td4"></td>
+            </tr>
+            <tr>
+                <td class="td4"></td><td class="td4"></td><td class="td4"></td><td class="td4"></td>
+            </tr>
+            <tr>
+                <td class="td4"></td><td class="td4"></td><td class="td4"></td><td class="td4"></td>
+            </tr>
+            <tr>
+                <td class="td4"></td><td class="td4"></td><td class="td4"></td><td class="td4"></td>
+            </tr>
+            <tr>
+                <td class="td4"></td><td class="td4"></td><td class="td4"></td><td class="td4"></td>
+            </tr>
+            <tr>
+                <td class="td4"></td><td class="td4"></td><td class="td4"></td>
+            </tr>
+        
+            <!--COUNTER B C1-->
+            <tr>
+                <td class="td4"></td><td class="td4"></td><td class="td4"></td><td class="td4"></td>
+            </tr>
+            <tr>
+                <td class="td4"></td><td class="td4"></td><td class="td4"></td><td class="td4"></td>
+            </tr>
+            <tr>
+                <td class="td4"></td><td class="td4"></td><td class="td4"></td><td class="td4"></td>
+            </tr>
+            <tr>
+                <td class="td4"></td><td class="td4"></td><td class="td4"></td><td class="td4"></td>
+            </tr>
+            <tr>
+                <td class="td4"></td><td class="td4"></td><td class="td4"></td><td class="td4"></td>
+            </tr>
+            <tr>
+                <td class="td4"></td><td class="td4"></td><td class="td4"></td><td class="td4"></td>
+            </tr>
+            <tr>
+                <td class="td4"></td><td class="td4"></td><td class="td4"></td><td class="td4"></td>
+            </tr>
+            <tr>
+                <td class="td4"></td><td class="td4"></td><td class="td4"></td>
+            </tr>
+        </table>
+        
+        <table class="tb5">
+            <!--COUNTER A C1-->
+            <tr>
+                <td class="td5"></td><td class="td5"></td><td class="td5"></td><td class="td5"></td>
+            </tr>
+            <tr>
+                <td class="td5"></td><td class="td5"></td><td class="td5"></td><td class="td5"></td>
+            </tr>
+            <tr>
+                <td class="td5"></td><td class="td5"></td><td class="td5"></td><td class="td5"></td>
+            </tr>
+            <tr>
+                <td class="td5"></td><td class="td5"></td><td class="td5"></td><td class="td5"></td>
+            </tr>
+            <tr>
+                <td class="td5"></td><td class="td5"></td><td class="td5"></td><td class="td5"></td>
+            </tr>
+            <tr>
+                <td class="td5"></td><td class="td5"></td><td class="td5"></td><td class="td5"></td>
+            </tr>
+            <tr>
+                <td class="td5"></td><td class="td5"></td><td class="td5"></td><td class="td5"></td>
+            </tr>
+            <tr>
+                <td class="td5"></td><td class="td5"></td><td class="td5"></td>
+            </tr>
+        
+        
+            <!--COUNTER B C1-->
+            <tr>
+                <td class="td5"></td><td class="td5"></td><td class="td5"></td><td class="td5"></td>
+            </tr>
+            <tr>
+                <td class="td5"></td><td class="td5"></td><td class="td5"></td><td class="td5"></td>
+            </tr>
+            <tr>
+                <td class="td5"></td><td class="td5"></td><td class="td5"></td><td class="td5"></td>
+            </tr>
+            <tr>
+                <td class="td5"></td><td class="td5"></td><td class="td5"></td><td class="td5"></td>
+            </tr>
+            <tr>
+                <td class="td5"></td><td class="td5"></td><td class="td5"></td><td class="td5"></td>
+            </tr>
+            <tr>
+                <td class="td5"></td><td class="td5"></td><td class="td5"></td><td class="td5"></td>
+            </tr>
+            <tr>
+                <td class="td5"></td><td class="td5"></td><td class="td5"></td><td class="td5"></td>
+            </tr>
+            <tr>
+                <td class="td5"></td><td class="td5"></td><td class="td5"></td>
+        </table>
+            
+        <table class="tb6">
+            <!--COUNTER A C1-->
+            <tr>
+                <td class="td6"></td><td class="td6"></td><td class="td6"></td><td class="td6"></td>
+            </tr>
+            <tr>
+                <td class="td6"></td><td class="td6"></td><td class="td6"></td><td class="td6"></td>
+            </tr>
+            <tr>
+                <td class="td6"></td><td class="td6"></td><td class="td6"></td><td class="td6"></td>
+            </tr>
+            <tr>
+                <td class="td6"></td><td class="td6"></td><td class="td6"></td><td class="td6"></td>
+            </tr>
+            <tr>
+                <td class="td6"></td><td class="td6"></td><td class="td6"></td><td class="td6"></td>
+            </tr>
+            <tr>
+                <td class="td6"></td><td class="td6"></td><td class="td6"></td><td class="td6"></td>
+            </tr>
+            <tr>
+                <td class="td6"></td><td class="td6"></td><td class="td6"></td><td class="td6"></td>
+            </tr>
+            <tr>
+                <td class="td6"></td><td class="td6"></td><td class="td6"></td>
+            </tr>
+        
+            <!--COUNTER B C1-->
+            <tr>
+                <td class="td6"></td><td class="td6"></td><td class="td6"></td><td class="td6"></td>
+            </tr>
+            <tr>
+                <td class="td6"></td><td class="td6"></td><td class="td6"></td><td class="td6"></td>
+            </tr>
+            <tr>
+                <td class="td6"></td><td class="td6"></td><td class="td6"></td><td class="td6"></td>
+            </tr>
+            <tr>
+                <td class="td6"></td><td class="td6"></td><td class="td6"></td><td class="td6"></td>
+            </tr>
+            <tr>
+                <td class="td6"></td><td class="td6"></td><td class="td6"></td><td class="td6"></td>
+            </tr>
+            <tr>
+                <td class="td6"></td><td class="td6"></td><td class="td6"></td><td class="td6"></td>
+            </tr>
+            <tr>
+                <td class="td6"></td><td class="td6"></td><td class="td6"></td><td class="td6"></td>
+            </tr>
+            <tr>
+                <td class="td6"></td><td class="td6"></td><td class="td6"></td>
+            </tr>
+        </table>
+
+        <table class="tb7">
+            <!--COUNTER A C1-->
+            <tr>
+                <td class="td7"></td><td class="td7"></td><td class="td7"></td><td class="td7"></td>
+            </tr>
+            <tr>
+                <td class="td7"></td><td class="td7"></td><td class="td7"></td><td class="td7"></td>
+            </tr>
+            <tr>
+                <td class="td7"></td><td class="td7"></td><td class="td7"></td><td class="td7"></td>
+            </tr>
+            <tr>
+                <td class="td7"></td><td class="td7"></td><td class="td7"></td><td class="td7"></td>
+            </tr>
+            <tr>
+                <td class="td7"></td><td class="td7"></td><td class="td7"></td><td class="td7"></td>
+            </tr>
+            <tr>
+                <td class="td7"></td><td class="td7"></td><td class="td7"></td><td class="td7"></td>
+            </tr>
+            <tr>
+                <td class="td7"></td><td class="td7"></td><td class="td7"></td><td class="td7"></td>
+            </tr>
+            <tr>
+                <td class="td7"></td><td class="td7"></td><td class="td7"></td>
+            </tr>
+        
+            <!--COUNTER B C1-->
+            <tr>
+                <td class="td7"></td><td class="td7"></td><td class="td7"></td><td class="td7"></td>
+            </tr>
+            <tr>
+                <td class="td7"></td><td class="td7"></td><td class="td7"></td><td class="td7"></td>
+            </tr>
+            <tr>
+                <td class="td7"></td><td class="td7"></td><td class="td7"></td><td class="td7"></td>
+            </tr>
+            <tr>
+                <td class="td7"></td><td class="td7"></td><td class="td7"></td><td class="td7"></td>
+            </tr>
+            <tr>
+                <td class="td7"></td><td class="td7"></td><td class="td7"></td><td class="td7"></td>
+            </tr>
+            <tr>
+                <td class="td7"></td><td class="td7"></td><td class="td7"></td><td class="td7"></td>
+            </tr>
+            <tr>
+                <td class="td7"></td><td class="td7"></td><td class="td7"></td><td class="td7"></td>
+            </tr>
+            <tr>
+                <td class="td7"></td><td class="td7"></td><td class="td7"></td>
+            </tr>
+        </table>
+    
+        <table class="tb8">
+            <!--COUNTER A C1-->
+            <tr>
+                <td class="td8"></td><td class="td8"></td><td class="td8"></td><td class="td8"></td>
+            </tr>
+            <tr>
+                <td class="td8"></td><td class="td8"></td><td class="td8"></td><td class="td8"></td>
+            </tr>
+            <tr>
+                <td class="td8"></td><td class="td8"></td><td class="td8"></td><td class="td8"></td>
+            </tr>
+            <tr>
+                <td class="td8"></td><td class="td8"></td><td class="td8"></td><td class="td8"></td>
+            </tr>
+            <tr>
+                <td class="td8"></td><td class="td8"></td><td class="td8"></td><td class="td8"></td>
+            </tr>
+            <tr>
+                <td class="td8"></td><td class="td8"></td><td class="td8"></td><td class="td8"></td>
+            </tr>
+            <tr>
+                <td class="td8"></td><td class="td8"></td><td class="td8"></td><td class="td8"></td>
+            </tr>
+            <tr>
+                <td class="td8"></td><td class="td8"></td><td class="td8"></td>
+            </tr>
+        
+            <!--COUNTER B C1-->
+            <tr>
+                <td class="td8"></td><td class="td8"></td><td class="td8"></td><td class="td8"></td>
+            </tr>
+            <tr>
+                <td class="td8"></td><td class="td8"></td><td class="td8"></td><td class="td8"></td>
+            </tr>
+            <tr>
+                <td class="td8"></td><td class="td8"></td><td class="td8"></td><td class="td8"></td>
+            </tr>
+            <tr>
+                <td class="td8"></td><td class="td8"></td><td class="td8"></td><td class="td8"></td>
+            </tr>
+            <tr>
+                <td class="td8"></td><td class="td8"></td><td class="td8"></td><td class="td8"></td>
+            </tr>
+            <tr>
+                <td class="td8"></td><td class="td8"></td><td class="td8"></td><td class="td8"></td>
+            </tr>
+            <tr>
+                <td class="td8"></td><td class="td8"></td><td class="td8"></td><td class="td8"></td>
+            </tr>
+            <tr>
+                <td class="td8"></td><td class="td8"></td><td class="td8"></td>
+            </tr>
+        </table>
+
+        <table class="tb9">
+            <!--COUNTER A C1-->
+            <tr>
+                <td class="td9"></td><td class="td9"></td><td class="td9"></td><td class="td9"></td>
+            </tr>
+            <tr>
+                <td class="td9"></td><td class="td9"></td><td class="td9"></td><td class="td9"></td>
+            </tr>
+            <tr>
+                <td class="td9"></td><td class="td9"></td><td class="td9"></td><td class="td9"></td>
+            </tr>
+            <tr>
+                <td class="td9"></td><td class="td9"></td><td class="td9"></td><td class="td9"></td>
+            </tr>
+            <tr>
+                <td class="td9"></td><td class="td9"></td><td class="td9"></td><td class="td9"></td>
+            </tr>
+            <tr>
+                <td class="td9"></td><td class="td9"></td><td class="td9"></td><td class="td9"></td>
+            </tr>
+            <tr>
+                <td class="td9"></td><td class="td9"></td><td class="td9"></td><td class="td9"></td>
+            </tr>
+            <tr>
+                <td class="td9"></td><td class="td9"></td><td class="td9"></td>
+            </tr>
+        
+            <!--COUNTER B C1-->
+            <tr>
+                <td class="td9"></td><td class="td9"></td><td class="td9"></td><td class="td9"></td>
+            </tr>
+            <tr>
+                <td class="td9"></td><td class="td9"></td><td class="td9"></td><td class="td9"></td>
+            </tr>
+            <tr>
+                <td class="td9"></td><td class="td9"></td><td class="td9"></td><td class="td9"></td>
+            </tr>
+            <tr>
+                <td class="td9"></td><td class="td9"></td><td class="td9"></td><td class="td9"></td>
+            </tr>
+            <tr>
+                <td class="td9"></td><td class="td9"></td><td class="td9"></td><td class="td9"></td>
+            </tr>
+            <tr>
+                <td class="td9"></td><td class="td9"></td><td class="td9"></td><td class="td9"></td>
+            </tr>
+            <tr>
+                <td class="td9"></td><td class="td9"></td><td class="td9"></td><td class="td9"></td>
+            </tr>
+            <tr>
+                <td class="td9"></td><td class="td9"></td><td class="td9"></td>
+            </tr>
+        </table>
+
+        <table class="tb10">
+            <!--COUNTER A C1-->
+            <tr>
+                <td class="td10"></td><td class="td10"></td><td class="td10"></td><td class="td10"></td>
+            </tr>
+            <tr>
+                <td class="td10"></td><td class="td10"></td><td class="td10"></td><td class="td10"></td>
+            </tr>
+            <tr>
+                <td class="td10"></td><td class="td10"></td><td class="td10"></td><td class="td10"></td>
+            </tr>
+            <tr>
+                <td class="td10"></td><td class="td10"></td><td class="td10"></td><td class="td10"></td>
+            </tr>
+            <tr>
+                <td class="td10"></td><td class="td10"></td><td class="td10"></td><td class="td10"></td>
+            </tr>
+            <tr>
+                <td class="td10"></td><td class="td10"></td><td class="td10"></td><td class="td10"></td>
+            </tr>
+            <tr>
+                <td class="td10"></td><td class="td10"></td><td class="td10"></td><td class="td10"></td>
+            </tr>
+            <tr>
+                <td class="td10"></td><td class="td10"></td><td class="td10"></td>
+            </tr>
+        
+            <!--COUNTER B C1-->
+            <tr>
+                <td class="td10"></td><td class="td10"></td><td class="td10"></td><td class="td10"></td>
+            </tr>
+            <tr>
+                <td class="td10"></td><td class="td10"></td><td class="td10"></td><td class="td10"></td>
+            </tr>
+            <tr>
+                <td class="td10"></td><td class="td10"></td><td class="td10"></td><td class="td10"></td>
+            </tr>
+            <tr>
+                <td class="td10"></td><td class="td10"></td><td class="td10"></td><td class="td10"></td>
+            </tr>
+            <tr>
+                <td class="td10"></td><td class="td10"></td><td class="td10"></td><td class="td10"></td>
+            </tr>
+            <tr>
+                <td class="td10"></td><td class="td10"></td><td class="td10"></td><td class="td10"></td>
+            </tr>
+            <tr>
+                <td class="td10"></td><td class="td10"></td><td class="td10"></td><td class="td10"></td>
+            </tr>
+            <tr>
+                <td class="td10"></td><td class="td10"></td><td class="td10"></td>
+            </tr>
+        </table>
+
+        <table class="tb11">
+            <!--COUNTER A C1-->
+            <tr>
+                <td class="td11"></td><td class="td11"></td><td class="td11"></td><td class="td11"></td>
+            </tr>
+            <tr>
+                <td class="td11"></td><td class="td11"></td><td class="td11"></td><td class="td11"></td>
+            </tr>
+            <tr>
+                <td class="td11"></td><td class="td11"></td><td class="td11"></td><td class="td11"></td>
+            </tr>
+            <tr>
+                <td class="td11"></td><td class="td11"></td><td class="td11"></td><td class="td11"></td>
+            </tr>
+            <tr>
+                <td class="td11"></td><td class="td11"></td><td class="td11"></td><td class="td11"></td>
+            </tr>
+            <tr>
+                <td class="td11"></td><td class="td11"></td><td class="td11"></td><td class="td11"></td>
+            </tr>
+            <tr>
+                <td class="td11"></td><td class="td11"></td><td class="td11"></td><td class="td11"></td>
+            </tr>
+            <tr>
+                <td class="td11"></td><td class="td11"></td><td class="td11"></td>
+            </tr>
+        
+            <!--COUNTER B C1-->
+            <tr>
+                <td class="td11"></td><td class="td11"></td><td class="td11"></td><td class="td11"></td>
+            </tr>
+            <tr>
+                <td class="td11"></td><td class="td11"></td><td class="td11"></td><td class="td11"></td>
+            </tr>
+            <tr>
+                <td class="td11"></td><td class="td11"></td><td class="td11"></td><td class="td11"></td>
+            </tr>
+            <tr>
+                <td class="td11"></td><td class="td11"></td><td class="td11"></td><td class="td11"></td>
+            </tr>
+            <tr>
+                <td class="td11"></td><td class="td11"></td><td class="td11"></td><td class="td11"></td>
+            </tr>
+            <tr>
+                <td class="td11"></td><td class="td11"></td><td class="td11"></td><td class="td11"></td>
+            </tr>
+            <tr>
+                <td class="td11"></td><td class="td11"></td><td class="td11"></td><td class="td11"></td>
+            </tr>
+            <tr>
+                <td class="td11"></td><td class="td11"></td><td class="td11"></td>
+            </tr>
+        </table>
+
+        <table class="tb12">
+            <!--COUNTER A C1-->
+            <tr>
+                <td class="td12"></td><td class="td12"></td><td class="td12"></td><td class="td12"></td>
+            </tr>
+            <tr>
+                <td class="td12"></td><td class="td12"></td><td class="td12"></td><td class="td12"></td>
+            </tr>
+            <tr>
+                <td class="td12"></td><td class="td12"></td><td class="td12"></td><td class="td12"></td>
+            </tr>
+            <tr>
+                <td class="td12"></td><td class="td12"></td><td class="td12"></td><td class="td12"></td>
+            </tr>
+            <tr>
+                <td class="td12"></td><td class="td12"></td><td class="td12"></td><td class="td12"></td>
+            </tr>
+            <tr>
+                <td class="td12"></td><td class="td12"></td><td class="td12"></td><td class="td12"></td>
+            </tr>
+            <tr>
+                <td class="td12"></td><td class="td12"></td><td class="td12"></td><td class="td12"></td>
+            </tr>
+            <tr>
+                <td class="td12"></td><td class="td12"></td><td class="td12"></td>
+            </tr>
+        
+            <!--COUNTER B C1-->
+            <tr>
+                <td class="td12"></td><td class="td12"></td><td class="td12"></td><td class="td12"></td>
+            </tr>
+            <tr>
+                <td class="td12"></td><td class="td12"></td><td class="td12"></td><td class="td12"></td>
+            </tr>
+            <tr>
+                <td class="td12"></td><td class="td12"></td><td class="td12"></td><td class="td12"></td>
+            </tr>
+            <tr>
+                <td class="td12"></td><td class="td12"></td><td class="td12"></td><td class="td12"></td>
+            </tr>
+            <tr>
+                <td class="td12"></td><td class="td12"></td><td class="td12"></td><td class="td12"></td>
+            </tr>
+            <tr>
+                <td class="td12"></td><td class="td12"></td><td class="td12"></td><td class="td12"></td>
+            </tr>
+            <tr>
+                <td class="td12"></td><td class="td12"></td><td class="td12"></td><td class="td12"></td>
+            </tr>
+            <tr>
+                <td class="td12"></td><td class="td12"></td><td class="td12"></td>
+            </tr>
+        </table>
+
+        <table class="tb13">
+            <!--COUNTER A C1-->
+            <tr>
+                <td class="td13"></td><td class="td13"></td><td class="td13"></td><td class="td13"></td>
+            </tr>
+            <tr>
+                <td class="td13"></td><td class="td13"></td><td class="td13"></td><td class="td13"></td>
+            </tr>
+            <tr>
+                <td class="td13"></td><td class="td13"></td><td class="td13"></td><td class="td13"></td>
+            </tr>
+            <tr>
+                <td class="td13"></td><td class="td13"></td><td class="td13"></td><td class="td13"></td>
+            </tr>
+            <tr>
+                <td class="td13"></td><td class="td13"></td><td class="td13"></td><td class="td13"></td>
+            </tr>
+            <tr>
+                <td class="td13"></td><td class="td13"></td><td class="td13"></td><td class="td13"></td>
+            </tr>
+            <tr>
+                <td class="td13"></td><td class="td13"></td><td class="td13"></td><td class="td13"></td>
+            </tr>
+            <tr>
+                <td class="td13"></td><td class="td13"></td><td class="td13"></td>
+            </tr>
+        
+            <!--COUNTER B C1-->
+            <tr>
+                <td class="td13"></td><td class="td13"></td><td class="td13"></td><td class="td13"></td>
+            </tr>
+            <tr>
+                <td class="td13"></td><td class="td13"></td><td class="td13"></td><td class="td13"></td>
+            </tr>
+            <tr>
+                <td class="td13"></td><td class="td13"></td><td class="td13"></td><td class="td13"></td>
+            </tr>
+            <tr>
+                <td class="td13"></td><td class="td13"></td><td class="td13"></td><td class="td13"></td>
+            </tr>
+            <tr>
+                <td class="td13"></td><td class="td13"></td><td class="td13"></td><td class="td13"></td>
+            </tr>
+            <tr>
+                <td class="td13"></td><td class="td13"></td><td class="td13"></td><td class="td13"></td>
+            </tr>
+            <tr>
+                <td class="td13"></td><td class="td13"></td><td class="td13"></td><td class="td13"></td>
+            </tr>
+            <tr>
+                <td class="td13"></td><td class="td13"></td><td class="td13"></td>
+            </tr>
+        </table>
+
+        <table class="tb14">
+            <!--COUNTER A C1-->
+            <tr>
+                <td class="td14"></td><td class="td14"></td><td class="td14"></td><td class="td14"></td>
+            </tr>
+            <tr>
+                <td class="td14"></td><td class="td14"></td><td class="td14"></td><td class="td14"></td>
+            </tr>
+            <tr>
+                <td class="td14"></td><td class="td14"></td><td class="td14"></td><td class="td14"></td>
+            </tr>
+            <tr>
+                <td class="td14"></td><td class="td14"></td><td class="td14"></td><td class="td14"></td>
+            </tr>
+            <tr>
+                <td class="td14"></td><td class="td14"></td><td class="td14"></td><td class="td14"></td>
+            </tr>
+            <tr>
+                <td class="td14"></td><td class="td14"></td><td class="td14"></td><td class="td14"></td>
+            </tr>
+            <tr>
+                <td class="td14"></td><td class="td14"></td><td class="td14"></td><td class="td14"></td>
+            </tr>
+            <tr>
+                <td class="td14"></td><td class="td14"></td><td class="td14"></td>
+            </tr>
+        
+            <!--COUNTER B C1-->
+            <tr>
+                <td class="td14"></td><td class="td14"></td><td class="td14"></td><td class="td14"></td>
+            </tr>
+            <tr>
+                <td class="td14"></td><td class="td14"></td><td class="td14"></td><td class="td14"></td>
+            </tr>
+            <tr>
+                <td class="td14"></td><td class="td14"></td><td class="td14"></td><td class="td14"></td>
+            </tr>
+            <tr>
+                <td class="td14"></td><td class="td14"></td><td class="td14"></td><td class="td14"></td>
+            </tr>
+            <tr>
+                <td class="td14"></td><td class="td14"></td><td class="td14"></td><td class="td14"></td>
+            </tr>
+            <tr>
+                <td class="td14"></td><td class="td14"></td><td class="td14"></td><td class="td14"></td>
+            </tr>
+            <tr>
+                <td class="td14"></td><td class="td14"></td><td class="td14"></td><td class="td14"></td>
+            </tr>
+            <tr>
+                <td class="td14"></td><td class="td14"></td><td class="td14"></td>
+            </tr>
+        </table>
+
+        <table class="tb15">
+            <!--COUNTER A C1-->
+            <tr>
+                <td class="td15"></td><td class="td15"></td><td class="td15"></td><td class="td15"></td>
+            </tr>
+            <tr>
+                <td class="td15"></td><td class="td15"></td><td class="td15"></td><td class="td15"></td>
+            </tr>
+            <tr>
+                <td class="td15"></td><td class="td15"></td><td class="td15"></td><td class="td15"></td>
+            </tr>
+            <tr>
+                <td class="td15"></td><td class="td15"></td><td class="td15"></td><td class="td15"></td>
+            </tr>
+            <tr>
+                <td class="td15"></td><td class="td15"></td><td class="td15"></td><td class="td15"></td>
+            </tr>
+            <tr>
+                <td class="td15"></td><td class="td15"></td><td class="td15"></td><td class="td15"></td>
+            </tr>
+            <tr>
+                <td class="td15"></td><td class="td15"></td><td class="td15"></td><td class="td15"></td>
+            </tr>
+            <tr>
+                <td class="td15"></td><td class="td15"></td><td class="td15"></td>
+            </tr>
+        
+            <!--COUNTER B C1-->
+            <tr>
+                <td class="td15"></td><td class="td15"></td><td class="td15"></td><td class="td15"></td>
+            </tr>
+            <tr>
+                <td class="td15"></td><td class="td15"></td><td class="td15"></td><td class="td15"></td>
+            </tr>
+            <tr>
+                <td class="td15"></td><td class="td15"></td><td class="td15"></td><td class="td15"></td>
+            </tr>
+            <tr>
+                <td class="td15"></td><td class="td15"></td><td class="td15"></td><td class="td15"></td>
+            </tr>
+            <tr>
+                <td class="td15"></td><td class="td15"></td><td class="td15"></td><td class="td15"></td>
+            </tr>
+            <tr>
+                <td class="td15"></td><td class="td15"></td><td class="td15"></td><td class="td15"></td>
+            </tr>
+            <tr>
+                <td class="td15"></td><td class="td15"></td><td class="td15"></td><td class="td15"></td>
+            </tr>
+            <tr>
+                <td class="td15"></td><td class="td15"></td><td class="td15"></td>
+            </tr>
+        </table>
+
+        <table class="tb16">
+            <!--COUNTER A C1-->
+            <tr>
+                <td class="td16"></td><td class="td16"></td><td class="td16"></td><td class="td16"></td>
+            </tr>
+            <tr>
+                <td class="td16"></td><td class="td16"></td><td class="td16"></td><td class="td16"></td>
+            </tr>
+            <tr>
+                <td class="td16"></td><td class="td16"></td><td class="td16"></td><td class="td16"></td>
+            </tr>
+            <tr>
+                <td class="td16"></td><td class="td16"></td><td class="td16"></td><td class="td16"></td>
+            </tr>
+            <tr>
+                <td class="td16"></td><td class="td16"></td><td class="td16"></td><td class="td16"></td>
+            </tr>
+            <tr>
+                <td class="td16"></td><td class="td16"></td><td class="td16"></td><td class="td16"></td>
+            </tr>
+            <tr>
+                <td class="td16"></td><td class="td16"></td><td class="td16"></td><td class="td16"></td>
+            </tr>
+            <tr>
+                <td class="td16"></td><td class="td16"></td><td class="td16"></td>
+            </tr>
+        
+            <!--COUNTER B C1-->
+            <tr>
+                <td class="td16"></td><td class="td16"></td><td class="td16"></td><td class="td16"></td>
+            </tr>
+            <tr>
+                <td class="td16"></td><td class="td16"></td><td class="td16"></td><td class="td16"></td>
+            </tr>
+            <tr>
+                <td class="td16"></td><td class="td16"></td><td class="td16"></td><td class="td16"></td>
+            </tr>
+            <tr>
+                <td class="td16"></td><td class="td16"></td><td class="td16"></td><td class="td16"></td>
+            </tr>
+            <tr>
+                <td class="td16"></td><td class="td16"></td><td class="td16"></td><td class="td16"></td>
+            </tr>
+            <tr>
+                <td class="td16"></td><td class="td16"></td><td class="td16"></td><td class="td16"></td>
+            </tr>
+            <tr>
+                <td class="td16"></td><td class="td16"></td><td class="td16"></td><td class="td16"></td>
+            </tr>
+            <tr>
+                <td class="td16"></td><td class="td16"></td><td class="td16"></td>
+            </tr>
+        </table>
+
+        <table class="tb17">
+            <!--COUNTER A C1-->
+            <tr>
+                <td class="td17"></td><td class="td17"></td><td class="td17"></td><td class="td17"></td>
+            </tr>
+            <tr>
+                <td class="td17"></td><td class="td17"></td><td class="td17"></td><td class="td17"></td>
+            </tr>
+            <tr>
+                <td class="td17"></td><td class="td17"></td><td class="td17"></td><td class="td17"></td>
+            </tr>
+            <tr>
+                <td class="td17"></td><td class="td17"></td><td class="td17"></td><td class="td17"></td>
+            </tr>
+            <tr>
+                <td class="td17"></td><td class="td17"></td><td class="td17"></td><td class="td17"></td>
+            </tr>
+            <tr>
+                <td class="td17"></td><td class="td17"></td><td class="td17"></td><td class="td17"></td>
+            </tr>
+            <tr>
+                <td class="td17"></td><td class="td17"></td><td class="td17"></td><td class="td17"></td>
+            </tr>
+            <tr>
+                <td class="td17"></td><td class="td17"></td><td class="td17"></td>
+            </tr>
+        
+            <!--COUNTER B C1-->
+            <tr>
+                <td class="td17"></td><td class="td17"></td><td class="td17"></td><td class="td17"></td>
+            </tr>
+            <tr>
+                <td class="td17"></td><td class="td17"></td><td class="td17"></td><td class="td17"></td>
+            </tr>
+            <tr>
+                <td class="td17"></td><td class="td17"></td><td class="td17"></td><td class="td17"></td>
+            </tr>
+            <tr>
+                <td class="td17"></td><td class="td17"></td><td class="td17"></td><td class="td17"></td>
+            </tr>
+            <tr>
+                <td class="td17"></td><td class="td17"></td><td class="td17"></td><td class="td17"></td>
+            </tr>
+            <tr>
+                <td class="td17"></td><td class="td17"></td><td class="td17"></td><td class="td17"></td>
+            </tr>
+            <tr>
+                <td class="td17"></td><td class="td17"></td><td class="td17"></td><td class="td17"></td>
+            </tr>
+            <tr>
+                <td class="td17"></td><td class="td17"></td><td class="td17"></td>
+            </tr>
+        </table>
+
+        <table class="tb18">
+            <!--COUNTER A C1-->
+            <tr>
+                <td class="td18"></td><td class="td18"></td><td class="td18"></td><td class="td18"></td>
+            </tr>
+            <tr>
+                <td class="td18"></td><td class="td18"></td><td class="td18"></td><td class="td18"></td>
+            </tr>
+            <tr>
+                <td class="td18"></td><td class="td18"></td><td class="td18"></td><td class="td18"></td>
+            </tr>
+            <tr>
+                <td class="td18"></td><td class="td18"></td><td class="td18"></td><td class="td18"></td>
+            </tr>
+            <tr>
+                <td class="td18"></td><td class="td18"></td><td class="td18"></td><td class="td18"></td>
+            </tr>
+            <tr>
+                <td class="td18"></td><td class="td18"></td><td class="td18"></td><td class="td18"></td>
+            </tr>
+            <tr>
+                <td class="td18"></td><td class="td18"></td><td class="td18"></td><td class="td18"></td>
+            </tr>
+            <tr>
+                <td class="td18"></td><td class="td18"></td><td class="td18"></td>
+            </tr>
+        
+            <!--COUNTER B C1-->
+            <tr>
+                <td class="td18"></td><td class="td18"></td><td class="td18"></td><td class="td18"></td>
+            </tr>
+            <tr>
+                <td class="td18"></td><td class="td18"></td><td class="td18"></td><td class="td18"></td>
+            </tr>
+            <tr>
+                <td class="td18"></td><td class="td18"></td><td class="td18"></td><td class="td18"></td>
+            </tr>
+            <tr>
+                <td class="td18"></td><td class="td18"></td><td class="td18"></td><td class="td18"></td>
+            </tr>
+            <tr>
+                <td class="td18"></td><td class="td18"></td><td class="td18"></td><td class="td18"></td>
+            </tr>
+            <tr>
+                <td class="td18"></td><td class="td18"></td><td class="td18"></td><td class="td18"></td>
+            </tr>
+            <tr>
+                <td class="td18"></td><td class="td18"></td><td class="td18"></td><td class="td18"></td>
+            </tr>
+            <tr>
+                <td class="td18"></td><td class="td18"></td><td class="td18"></td>
+            </tr>
+        </table>
+
+        <table class="tb19">
+            <!--COUNTER A C1-->
+            <tr>
+                <td class="td19"></td><td class="td19"></td><td class="td19"></td><td class="td19"></td>
+            </tr>
+            <tr>
+                <td class="td19"></td><td class="td19"></td><td class="td19"></td><td class="td19"></td>
+            </tr>
+            <tr>
+                <td class="td19"></td><td class="td19"></td><td class="td19"></td><td class="td19"></td>
+            </tr>
+            <tr>
+                <td class="td19"></td><td class="td19"></td><td class="td19"></td><td class="td19"></td>
+            </tr>
+            <tr>
+                <td class="td19"></td><td class="td19"></td><td class="td19"></td><td class="td19"></td>
+            </tr>
+            <tr>
+                <td class="td19"></td><td class="td19"></td><td class="td19"></td><td class="td19"></td>
+            </tr>
+            <tr>
+                <td class="td19"></td><td class="td19"></td><td class="td19"></td><td class="td19"></td>
+            </tr>
+            <tr>
+                <td class="td19"></td><td class="td19"></td><td class="td19"></td>
+            </tr>
+        
+            <!--COUNTER B C1-->
+            <tr>
+                <td class="td19"></td><td class="td19"></td><td class="td19"></td><td class="td19"></td>
+            </tr>
+            <tr>
+                <td class="td19"></td><td class="td19"></td><td class="td19"></td><td class="td19"></td>
+            </tr>
+            <tr>
+                <td class="td19"></td><td class="td19"></td><td class="td19"></td><td class="td19"></td>
+            </tr>
+            <tr>
+                <td class="td19"></td><td class="td19"></td><td class="td19"></td><td class="td19"></td>
+            </tr>
+            <tr>
+                <td class="td19"></td><td class="td19"></td><td class="td19"></td><td class="td19"></td>
+            </tr>
+            <tr>
+                <td class="td19"></td><td class="td19"></td><td class="td19"></td><td class="td19"></td>
+            </tr>
+            <tr>
+                <td class="td19"></td><td class="td19"></td><td class="td19"></td><td class="td19"></td>
+            </tr>
+            <tr>
+                <td class="td19"></td><td class="td19"></td><td class="td19"></td>
+            </tr>
+        </table>
+
+        <table class="tb20">
+            <!--COUNTER A C1-->
+            <tr>
+                <td class="td20"></td><td class="td20"></td><td class="td20"></td><td class="td20"></td>
+            </tr>
+            <tr>
+                <td class="td20"></td><td class="td20"></td><td class="td20"></td><td class="td20"></td>
+            </tr>
+            <tr>
+                <td class="td20"></td><td class="td20"></td><td class="td20"></td><td class="td20"></td>
+            </tr>
+            <tr>
+                <td class="td20"></td><td class="td20"></td><td class="td20"></td><td class="td20"></td>
+            </tr>
+            <tr>
+                <td class="td20"></td><td class="td20"></td><td class="td20"></td><td class="td20"></td>
+            </tr>
+            <tr>
+                <td class="td20"></td><td class="td20"></td><td class="td20"></td><td class="td20"></td>
+            </tr>
+            <tr>
+                <td class="td20"></td><td class="td20"></td><td class="td20"></td><td class="td20"></td>
+            </tr>
+            <tr>
+                <td class="td20"></td><td class="td20"></td><td class="td20"></td>
+            </tr>
+        
+            <!--COUNTER B C1-->
+            <tr>
+                <td class="td20"></td><td class="td20"></td><td class="td20"></td><td class="td20"></td>
+            </tr>
+            <tr>
+                <td class="td20"></td><td class="td20"></td><td class="td20"></td><td class="td20"></td>
+            </tr>
+            <tr>
+                <td class="td20"></td><td class="td20"></td><td class="td20"></td><td class="td20"></td>
+            </tr>
+            <tr>
+                <td class="td20"></td><td class="td20"></td><td class="td20"></td><td class="td20"></td>
+            </tr>
+            <tr>
+                <td class="td20"></td><td class="td20"></td><td class="td20"></td><td class="td20"></td>
+            </tr>
+            <tr>
+                <td class="td20"></td><td class="td20"></td><td class="td20"></td><td class="td20"></td>
+            </tr>
+            <tr>
+                <td class="td20"></td><td class="td20"></td><td class="td20"></td><td class="td20"></td>
+            </tr>
+            <tr>
+                <td class="td20"></td><td class="td20"></td><td class="td20"></td>
+            </tr>
+        </table>
+
+        <table class="tb21">
+            <!--COUNTER A C1-->
+            <tr>
+                <td class="td21"></td><td class="td21"></td><td class="td21"></td><td class="td21"></td>
+            </tr>
+            <tr>
+                <td class="td21"></td><td class="td21"></td><td class="td21"></td><td class="td21"></td>
+            </tr>
+            <tr>
+                <td class="td21"></td><td class="td21"></td><td class="td21"></td><td class="td21"></td>
+            </tr>
+            <tr>
+                <td class="td21"></td><td class="td21"></td><td class="td21"></td><td class="td21"></td>
+            </tr>
+            <tr>
+                <td class="td21"></td><td class="td21"></td><td class="td21"></td><td class="td21"></td>
+            </tr>
+            <tr>
+                <td class="td21"></td><td class="td21"></td><td class="td21"></td><td class="td21"></td>
+            </tr>
+            <tr>
+                <td class="td21"></td><td class="td21"></td><td class="td21"></td><td class="td21"></td>
+            </tr>
+            <tr>
+                <td class="td21"></td><td class="td21"></td><td class="td21"></td>
+            </tr>
+        
+            <!--COUNTER B C1-->
+            <tr>
+                <td class="td21"></td><td class="td21"></td><td class="td21"></td><td class="td21"></td>
+            </tr>
+            <tr>
+                <td class="td21"></td><td class="td21"></td><td class="td21"></td><td class="td21"></td>
+            </tr>
+            <tr>
+                <td class="td21"></td><td class="td21"></td><td class="td21"></td><td class="td21"></td>
+            </tr>
+            <tr>
+                <td class="td21"></td><td class="td21"></td><td class="td21"></td><td class="td21"></td>
+            </tr>
+            <tr>
+                <td class="td21"></td><td class="td21"></td><td class="td21"></td><td class="td21"></td>
+            </tr>
+            <tr>
+                <td class="td21"></td><td class="td21"></td><td class="td21"></td><td class="td21"></td>
+            </tr>
+            <tr>
+                <td class="td21"></td><td class="td21"></td><td class="td21"></td><td class="td21"></td>
+            </tr>
+            <tr>
+                <td class="td21"></td><td class="td21"></td><td class="td21"></td>
+            </tr>
+        </table>
+    </div>
+   
+    <script>
+
+        var counter_element = []; //store element 1-31-A C#352 or 2-24-B C#367 on this array
+
+
+        //declaring day and month variable
+        var day_end = 31;
+        var day =[];
+     
+
+        //iterate day
+        for (i = 1; i <= day_end; i++){
+            day.push(i);
+        }
+        
+        //iterate and print day
+        for (i = 0; i < day.length; i++){
+            counter_element.push(i)
+        }
+
+
+         //declaring counter variables
+         var counter_start = 350;
+         var counter_end = 370;
+         var counters = [];
+
+         //iterate counter number
+         for (let i = counter_start; i <= counter_end; i++){
+             counters.push(i);
+         }
+        
+        //iterate counter values
+        var counter_sel = document.getElementById('counter_sel');
+        var sel_bycounter = document.getElementById('sel_bycounter');
+
+        
+
+        //create counter options
+        for (i = counter_start; i <= counter_end; i++){
+            let create_op = document.createElement('option');
+            create_op.id = "option_bycounter"
+            create_op.innerHTML = i;
+            create_op.value = i;
+            sel_bycounter.append(create_op);
+        }
+   
+
+        // ---------- C R E A T E  C A L E N D A R ---------------
+        var date = new Date();
+        var create_date = document.createElement('input');
+        create_date.setAttribute("id", "month");
+        create_date.setAttribute("type", "month");
+        create_date.setAttribute("max", date.getFullYear() + '-12');
+        create_date.setAttribute("min", date.getFullYear() + '-01');
+        document.getElementById('nav').prepend(create_date);
+
+        
+        //change month function
+        function Select(){
+            
+            var show_all = document.querySelector('.show_all').value;
+
+            var input = document.getElementById('month').value;
+            input.toString();
+            var slice = input.slice(5, );
+            var month_n = Number(slice);
+            
+            if (month_n >= 1 && counter_sel.value == "_354"){
+
+                //declaring counter variables
+                var counter_start = 350;
+                var counter_end = 370;
+                var counters = [];
+
+                //iterate counter number
+                for (let i = counter_start; i <= counter_end; i++){
+                    counters.push(i);
+                }
+                
+                
+                //declare html element
+                var td = document.getElementsByClassName('td');
+                var tdb = document.getElementsByClassName('tdb');
+            
+                //declare each counter
+                var c350 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[0];
+                    c350.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[0];
+                    c350.push(data);
+                }
+
+                var c351 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[1];
+                    c351.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[1];
+                    c351.push(data);
+                }
+
+                var c352 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[2];
+                    c352.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[2];
+                    c352.push(data);
+                }
+
+                var c353 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[3];
+                    c353.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[3];
+                    c353.push(data);
+                }
+
+                var c354 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[4];
+                    c354.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[4];
+                    c354.push(data);
+                }
+
+                var c355 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[5];
+                    c355.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[5];
+                    c355.push(data);
+                }
+
+                var c356 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[6];
+                    c356.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[6];
+                    c356.push(data);
+                }
+
+                var c357 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[7];
+                    c357.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[7];
+                    c357.push(data);
+                }
+                
+                var c358 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[8];
+                    c358.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[8];
+                    c358.push(data);
+                }
+
+                var c359 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[9];
+                    c359.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[9];
+                    c359.push(data);
+                }
+
+                var c360 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[10];
+                    c360.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[10];
+                    c360.push(data);
+                }
+
+                var c361 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[11];
+                    c361.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[11];
+                    c361.push(data);
+                }
+
+                var c362 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[12];
+                    c362.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[12];
+                    c362.push(data);
+                }
+
+                var c363 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[13];
+                    c363.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[13];
+                    c363.push(data);
+                }
+
+                var c364 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[14];
+                    c364.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[14];
+                    c364.push(data);
+                }
+
+                var c365 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[15];
+                    c365.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[15];
+                    c365.push(data);
+                }
+
+                var c366 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[16];
+                    c366.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[16];
+                    c366.push(data);
+                }
+
+                var c367 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[17];
+                    c367.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[17];
+                    c367.push(data);
+                }
+
+                var c368 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[18];
+                    c368.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[18];
+                    c368.push(data);
+                }
+
+                var c369 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[19];
+                    c369.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[19];
+                    c369.push(data);
+                }
+
+                var c370 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[20];
+                    c370.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[20];
+                    c370.push(data);
+                }
+                
+                //iterate to html
+                for (i = 0; i < c350.length; i++){
+                    td[i].innerHTML = c350[i];
+                }
+                
+                var td2 = document.getElementsByClassName("td2");
+                for (i = 0; i < c351.length; i++){
+                    td2[i].innerHTML = c351[i];
+                }
+
+                var td3 = document.getElementsByClassName("td3");
+                for (i = 0; i < c353.length; i++){
+                    td3[i].innerHTML = c352[i];
+                }
+                
+                var td4 = document.getElementsByClassName("td4");
+                for (i = 0; i < c353.length; i++){
+                    td4[i].innerHTML = c353[i];
+                }
+                
+                var td5 = document.getElementsByClassName("td5");
+                for (i = 0; i < c353.length; i++){
+                    td5[i].innerHTML = c354[i];
+                }
+
+                //remove excess element
+                let tb6 = document.querySelector('.tb6').style.visibility = 'collapse';
+                let tb7 = document.querySelector('.tb7').style.visibility = 'collapse';
+                let tb8 = document.querySelector('.tb8').style.visibility = 'collapse';
+                let tb9 = document.querySelector('.tb9').style.visibility = 'collapse';
+                let tb10 = document.querySelector('.tb10').style.visibility = 'collapse';
+                let tb11 = document.querySelector('.tb11').style.visibility = 'collapse';
+                let tb12 = document.querySelector('.tb12').style.visibility = 'collapse';
+                let tb13 = document.querySelector('.tb13').style.visibility = 'collapse';
+                let tb14 = document.querySelector('.tb14').style.visibility = 'collapse';
+                let tb15 = document.querySelector('.tb15').style.visibility = 'collapse';
+                let tb16 = document.querySelector('.tb16').style.visibility = 'collapse';
+                let tb17 = document.querySelector('.tb17').style.visibility = 'collapse';
+                let tb18 = document.querySelector('.tb18').style.visibility = 'collapse';
+                let tb19 = document.querySelector('.tb19').style.visibility = 'collapse';
+                let tb20 = document.querySelector('.tb20').style.visibility = 'collapse';
+                let tb21 = document.querySelector('.tb21').style.visibility = 'collapse';
+            
+            }
+
+
+            //GROUP B 355-359
+            else if (month_n >= 1 && counter_sel.value == "_359"){
+               
+                //declaring counter variables
+                var counter_start = 350;
+                var counter_end = 370;
+                var counters = [];
+
+                //iterate counter number
+                for (let i = counter_start; i <= counter_end; i++){
+                    counters.push(i);
+                }
+                
+                
+                //declare html element
+                var td = document.getElementsByClassName('td');
+                var tdb = document.getElementsByClassName('tdb');
+            
+                //declare each counter
+                var c350 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[0];
+                    c350.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[0];
+                    c350.push(data);
+                }
+
+                var c351 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[1];
+                    c351.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[1];
+                    c351.push(data);
+                }
+
+                var c352 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[2];
+                    c352.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[2];
+                    c352.push(data);
+                }
+
+                var c353 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[3];
+                    c353.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[3];
+                    c353.push(data);
+                }
+
+                var c354 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[4];
+                    c354.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[4];
+                    c354.push(data);
+                }
+
+                var c355 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[5];
+                    c355.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[5];
+                    c355.push(data);
+                }
+
+                var c356 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[6];
+                    c356.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[6];
+                    c356.push(data);
+                }
+
+                var c357 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[7];
+                    c357.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[7];
+                    c357.push(data);
+                }
+                
+                var c358 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[8];
+                    c358.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[8];
+                    c358.push(data);
+                }
+
+                var c359 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[9];
+                    c359.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[9];
+                    c359.push(data);
+                }
+
+                var c360 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[10];
+                    c360.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[10];
+                    c360.push(data);
+                }
+
+                var c361 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[11];
+                    c361.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[11];
+                    c361.push(data);
+                }
+
+                var c362 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[12];
+                    c362.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[12];
+                    c362.push(data);
+                }
+
+                var c363 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[13];
+                    c363.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[13];
+                    c363.push(data);
+                }
+
+                var c364 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[14];
+                    c364.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[14];
+                    c364.push(data);
+                }
+
+                var c365 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[15];
+                    c365.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[15];
+                    c365.push(data);
+                }
+
+                var c366 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[16];
+                    c366.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[16];
+                    c366.push(data);
+                }
+
+                var c367 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[17];
+                    c367.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[17];
+                    c367.push(data);
+                }
+
+                var c368 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[18];
+                    c368.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[18];
+                    c368.push(data);
+                }
+
+                var c369 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[19];
+                    c369.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[19];
+                    c369.push(data);
+                }
+
+                var c370 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[20];
+                    c370.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[20];
+                    c370.push(data);
+                }
+                
+                //iterate to html
+                for (i = 0; i < c350.length; i++){
+                    td[i].innerHTML = c355[i];
+                }
+                
+                var td2 = document.getElementsByClassName("td2");
+                for (i = 0; i < c351.length; i++){
+                    td2[i].innerHTML = c356[i];
+                }
+
+                var td3 = document.getElementsByClassName("td3");
+                for (i = 0; i < c353.length; i++){
+                    td3[i].innerHTML = c357[i];
+                }
+                
+                var td4 = document.getElementsByClassName("td4");
+                for (i = 0; i < c353.length; i++){
+                    td4[i].innerHTML = c358[i];
+                }
+                
+                var td5 = document.getElementsByClassName("td5");
+                for (i = 0; i < c353.length; i++){
+                    td5[i].innerHTML = c359[i];
+                }
+
+                //remove excess element
+                let tb6 = document.querySelector('.tb6').style.visibility = 'collapse';
+                let tb7 = document.querySelector('.tb7').style.visibility = 'collapse';
+                let tb8 = document.querySelector('.tb8').style.visibility = 'collapse';
+                let tb9 = document.querySelector('.tb9').style.visibility = 'collapse';
+                let tb10 = document.querySelector('.tb10').style.visibility = 'collapse';
+                let tb11 = document.querySelector('.tb11').style.visibility = 'collapse';
+                let tb12 = document.querySelector('.tb12').style.visibility = 'collapse';
+                let tb13 = document.querySelector('.tb13').style.visibility = 'collapse';
+                let tb14 = document.querySelector('.tb14').style.visibility = 'collapse';
+                let tb15 = document.querySelector('.tb15').style.visibility = 'collapse';
+                let tb16 = document.querySelector('.tb16').style.visibility = 'collapse';
+                let tb17 = document.querySelector('.tb17').style.visibility = 'collapse';
+                let tb18 = document.querySelector('.tb18').style.visibility = 'collapse';
+                let tb19 = document.querySelector('.tb19').style.visibility = 'collapse';
+                let tb20 = document.querySelector('.tb20').style.visibility = 'collapse';
+                let tb21 = document.querySelector('.tb21').style.visibility = 'collapse';
+     
+            }
+
+
+            //GROUP C 355-360
+            else if (month_n >= 1 && counter_sel.value == "_364"){
+               
+                //declaring counter variables
+                var counter_start = 350;
+                var counter_end = 370;
+                var counters = [];
+
+                //iterate counter number
+                for (let i = counter_start; i <= counter_end; i++){
+                    counters.push(i);
+                }
+                
+                
+                //declare html element
+                var td = document.getElementsByClassName('td');
+                var tdb = document.getElementsByClassName('tdb');
+            
+                //declare each counter
+                var c350 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[0];
+                    c350.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[0];
+                    c350.push(data);
+                }
+
+                var c351 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[1];
+                    c351.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[1];
+                    c351.push(data);
+                }
+
+                var c352 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[2];
+                    c352.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[2];
+                    c352.push(data);
+                }
+
+                var c353 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[3];
+                    c353.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[3];
+                    c353.push(data);
+                }
+
+                var c354 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[4];
+                    c354.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[4];
+                    c354.push(data);
+                }
+
+                var c355 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[5];
+                    c355.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[5];
+                    c355.push(data);
+                }
+
+                var c356 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[6];
+                    c356.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[6];
+                    c356.push(data);
+                }
+
+                var c357 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[7];
+                    c357.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[7];
+                    c357.push(data);
+                }
+                
+                var c358 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[8];
+                    c358.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[8];
+                    c358.push(data);
+                }
+
+                var c359 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[9];
+                    c359.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[9];
+                    c359.push(data);
+                }
+
+                var c360 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[10];
+                    c360.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[10];
+                    c360.push(data);
+                }
+
+                var c361 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[11];
+                    c361.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[11];
+                    c361.push(data);
+                }
+
+                var c362 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[12];
+                    c362.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[12];
+                    c362.push(data);
+                }
+
+                var c363 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[13];
+                    c363.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[13];
+                    c363.push(data);
+                }
+
+                var c364 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[14];
+                    c364.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[14];
+                    c364.push(data);
+                }
+
+                var c365 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[15];
+                    c365.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[15];
+                    c365.push(data);
+                }
+
+                var c366 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[16];
+                    c366.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[16];
+                    c366.push(data);
+                }
+
+                var c367 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[17];
+                    c367.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[17];
+                    c367.push(data);
+                }
+
+                var c368 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[18];
+                    c368.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[18];
+                    c368.push(data);
+                }
+
+                var c369 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[19];
+                    c369.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[19];
+                    c369.push(data);
+                }
+
+                var c370 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[20];
+                    c370.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[20];
+                    c370.push(data);
+                }
+                
+                //iterate to html
+                for (i = 0; i < c350.length; i++){
+                    td[i].innerHTML = c360[i];
+                }
+                
+                var td2 = document.getElementsByClassName("td2");
+                for (i = 0; i < c351.length; i++){
+                    td2[i].innerHTML = c361[i];
+                }
+
+                var td3 = document.getElementsByClassName("td3");
+                for (i = 0; i < c353.length; i++){
+                    td3[i].innerHTML = c362[i];
+                }
+                
+                var td4 = document.getElementsByClassName("td4");
+                for (i = 0; i < c353.length; i++){
+                    td4[i].innerHTML = c363[i];
+                }
+                
+                var td5 = document.getElementsByClassName("td5");
+                for (i = 0; i < c353.length; i++){
+                    td5[i].innerHTML = c364[i];
+                }
+
+                //remove excess element
+                let tb6 = document.querySelector('.tb6').style.visibility = 'collapse';
+                let tb7 = document.querySelector('.tb7').style.visibility = 'collapse';
+                let tb8 = document.querySelector('.tb8').style.visibility = 'collapse';
+                let tb9 = document.querySelector('.tb9').style.visibility = 'collapse';
+                let tb10 = document.querySelector('.tb10').style.visibility = 'collapse';
+                let tb11 = document.querySelector('.tb11').style.visibility = 'collapse';
+                let tb12 = document.querySelector('.tb12').style.visibility = 'collapse';
+                let tb13 = document.querySelector('.tb13').style.visibility = 'collapse';
+                let tb14 = document.querySelector('.tb14').style.visibility = 'collapse';
+                let tb15 = document.querySelector('.tb15').style.visibility = 'collapse';
+                let tb16 = document.querySelector('.tb16').style.visibility = 'collapse';
+                let tb17 = document.querySelector('.tb17').style.visibility = 'collapse';
+                let tb18 = document.querySelector('.tb18').style.visibility = 'collapse';
+                let tb19 = document.querySelector('.tb19').style.visibility = 'collapse';
+                let tb20 = document.querySelector('.tb20').style.visibility = 'collapse';
+                let tb21 = document.querySelector('.tb21').style.visibility = 'collapse';
+            }
+
+            
+            //GROUP D
+            else if (month_n >= 1 && counter_sel.value == "_370"){
+               
+                //declaring counter variables
+                var counter_start = 350;
+                var counter_end = 370;
+                var counters = [];
+
+                //iterate counter number
+                for (let i = counter_start; i <= counter_end; i++){
+                    counters.push(i);
+                }
+                
+                
+                //declare html element
+                var td = document.getElementsByClassName('td');
+                var tdb = document.getElementsByClassName('tdb');
+            
+                //declare each counter
+                var c350 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[0];
+                    c350.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[0];
+                    c350.push(data);
+                }
+
+                var c351 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[1];
+                    c351.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[1];
+                    c351.push(data);
+                }
+
+                var c352 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[2];
+                    c352.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[2];
+                    c352.push(data);
+                }
+
+                var c353 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[3];
+                    c353.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[3];
+                    c353.push(data);
+                }
+
+                var c354 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[4];
+                    c354.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[4];
+                    c354.push(data);
+                }
+
+                var c355 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[5];
+                    c355.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[5];
+                    c355.push(data);
+                }
+
+                var c356 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[6];
+                    c356.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[6];
+                    c356.push(data);
+                }
+
+                var c357 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[7];
+                    c357.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[7];
+                    c357.push(data);
+                }
+                
+                var c358 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[8];
+                    c358.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[8];
+                    c358.push(data);
+                }
+
+                var c359 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[9];
+                    c359.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[9];
+                    c359.push(data);
+                }
+
+                var c360 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[10];
+                    c360.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[10];
+                    c360.push(data);
+                }
+
+                var c361 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[11];
+                    c361.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[11];
+                    c361.push(data);
+                }
+
+                var c362 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[12];
+                    c362.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[12];
+                    c362.push(data);
+                }
+
+                var c363 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[13];
+                    c363.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[13];
+                    c363.push(data);
+                }
+
+                var c364 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[14];
+                    c364.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[14];
+                    c364.push(data);
+                }
+
+                var c365 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[15];
+                    c365.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[15];
+                    c365.push(data);
+                }
+
+                var c366 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[16];
+                    c366.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[16];
+                    c366.push(data);
+                }
+
+                var c367 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[17];
+                    c367.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[17];
+                    c367.push(data);
+                }
+
+                var c368 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[18];
+                    c368.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[18];
+                    c368.push(data);
+                }
+
+                var c369 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[19];
+                    c369.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[19];
+                    c369.push(data);
+                }
+
+                var c370 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[20];
+                    c370.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[20];
+                    c370.push(data);
+                }
+                
+                //iterate to html
+                for (i = 0; i < c350.length; i++){
+                    td[i].innerHTML = c365[i];
+                }
+                
+                var td2 = document.getElementsByClassName("td2");
+                for (i = 0; i < c351.length; i++){
+                    td2[i].innerHTML = c366[i];
+                }
+
+                var td3 = document.getElementsByClassName("td3");
+                for (i = 0; i < c353.length; i++){
+                    td3[i].innerHTML = c367[i];
+                }
+                
+                var td4 = document.getElementsByClassName("td4");
+                for (i = 0; i < c353.length; i++){
+                    td4[i].innerHTML = c368[i];
+                }
+                
+                var td5 = document.getElementsByClassName("td5");
+                for (i = 0; i < c353.length; i++){
+                    td5[i].innerHTML = c369[i];
+                }
+
+                var td6 = document.getElementsByClassName("td6");
+                for (i = 0; i < c353.length; i++){
+                    td6[i].innerHTML = c370[i];
+                }
+
+                //remove excess elements
+                let tb7 = document.querySelector('.tb7').style.visibility = 'collapse';
+                let tb8 = document.querySelector('.tb8').style.visibility = 'collapse';
+                let tb9 = document.querySelector('.tb9').style.visibility = 'collapse';
+                let tb10 = document.querySelector('.tb10').style.visibility = 'collapse';
+                let tb11 = document.querySelector('.tb11').style.visibility = 'collapse';
+                let tb12 = document.querySelector('.tb12').style.visibility = 'collapse';
+                let tb13 = document.querySelector('.tb13').style.visibility = 'collapse';
+                let tb14 = document.querySelector('.tb14').style.visibility = 'collapse';
+                let tb15 = document.querySelector('.tb15').style.visibility = 'collapse';
+                let tb16 = document.querySelector('.tb16').style.visibility = 'collapse';
+                let tb17 = document.querySelector('.tb17').style.visibility = 'collapse';
+                let tb18 = document.querySelector('.tb18').style.visibility = 'collapse';
+                let tb19 = document.querySelector('.tb19').style.visibility = 'collapse';
+                let tb20 = document.querySelector('.tb20').style.visibility = 'collapse';
+                let tb21 = document.querySelector('.tb21').style.visibility = 'collapse';
+
+            }
+
+            //for one counter only    
+            else if (month_n >= 1 && sel_bycounter.value >= 350){
+                let sel_bycounter = document.querySelector('#sel_bycounter');
+                let td = document.getElementsByClassName('td');
+                let table_data = [];
+
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + sel_bycounter.value;
+                    table_data.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + sel_bycounter.value;
+                    table_data.push(data);
+                }
+
+                for (i = 0; i < table_data.length; i++){
+                    td[i].innerHTML = table_data[i];
+                }
+               
+
+                //remove excess elements
+                let tb2 = document.querySelector('.tb2').style.visibility = 'collapse';
+                let tb3 = document.querySelector('.tb3').style.visibility = 'collapse';
+                let tb4 = document.querySelector('.tb4').style.visibility = 'collapse';
+                let tb5 = document.querySelector('.tb5').style.visibility = 'collapse';
+                let tb6 = document.querySelector('.tb6').style.visibility = 'collapse';
+                let tb7 = document.querySelector('.tb7').style.visibility = 'collapse';
+                let tb8 = document.querySelector('.tb8').style.visibility = 'collapse';
+                let tb9 = document.querySelector('.tb9').style.visibility = 'collapse';
+                let tb10 = document.querySelector('.tb10').style.visibility = 'collapse';
+                let tb11 = document.querySelector('.tb11').style.visibility = 'collapse';
+                let tb12 = document.querySelector('.tb12').style.visibility = 'collapse';
+                let tb13 = document.querySelector('.tb13').style.visibility = 'collapse';
+                let tb14 = document.querySelector('.tb14').style.visibility = 'collapse';
+                let tb15 = document.querySelector('.tb15').style.visibility = 'collapse';
+                let tb16 = document.querySelector('.tb16').style.visibility = 'collapse';
+                let tb17 = document.querySelector('.tb17').style.visibility = 'collapse';
+                let tb18 = document.querySelector('.tb18').style.visibility = 'collapse';
+                let tb19 = document.querySelector('.tb19').style.visibility = 'collapse';
+                let tb20 = document.querySelector('.tb20').style.visibility = 'collapse';
+                let tb21 = document.querySelector('.tb21').style.visibility = 'collapse';
+            }
+            
+
+        }
+    //show all data
+    function showAll(){
+
+        var input = document.getElementById('month').value;
+        input.toString();
+        var slice = input.slice(5, );
+        var month_n = Number(slice);
+
+
+        var help_group = document.querySelector('.help_group').style.visibility ='hidden';
+        var sel_bycounter = document.getElementById('sel_bycounter').value;
+        var counter_sel = document.getElementById('counter_sel').value;
+
+        if (month_n >= 1 && sel_bycounter == 'Counter' && counter_sel == ''){
+                var show_data = document.querySelector('.group_five').style.visibility = 'visible';
+                var body = document.querySelector('.body').style.overflow = 'visible';
+                var display_greetings = document.querySelector('.display_greetings').style.visibility = 'hidden';
+                var setting_group = document.querySelector('.setting_group').style.visibility = 'visible';
+                var body = document.querySelector('body').style.backgroundColor = '#d3cede';
+                //declaring counter variables
+                var counter_start = 350;
+                var counter_end = 370;
+                var counters = [];
+
+                //iterate counter number
+                for (let i = counter_start; i <= counter_end; i++){
+                    counters.push(i);
+                }
+                
+                
+                //declare html element
+                var td = document.getElementsByClassName('td');
+                var tdb = document.getElementsByClassName('tdb');
+            
+                //declare each counter
+                var c350 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[0];
+                    c350.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[0];
+                    c350.push(data);
+                }
+
+                var c351 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[1];
+                    c351.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[1];
+                    c351.push(data);
+                }
+
+                var c352 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[2];
+                    c352.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[2];
+                    c352.push(data);
+                }
+
+                var c353 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[3];
+                    c353.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[3];
+                    c353.push(data);
+                }
+
+                var c354 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[4];
+                    c354.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[4];
+                    c354.push(data);
+                }
+
+                var c355 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[5];
+                    c355.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[5];
+                    c355.push(data);
+                }
+
+                var c356 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[6];
+                    c356.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[6];
+                    c356.push(data);
+                }
+
+                var c357 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[7];
+                    c357.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[7];
+                    c357.push(data);
+                }
+                
+                var c358 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[8];
+                    c358.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[8];
+                    c358.push(data);
+                }
+
+                var c359 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[9];
+                    c359.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[9];
+                    c359.push(data);
+                }
+
+                var c360 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[10];
+                    c360.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[10];
+                    c360.push(data);
+                }
+
+                var c361 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[11];
+                    c361.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[11];
+                    c361.push(data);
+                }
+
+                var c362 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[12];
+                    c362.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[12];
+                    c362.push(data);
+                }
+
+                var c363 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[13];
+                    c363.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[13];
+                    c363.push(data);
+                }
+
+                var c364 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[14];
+                    c364.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[14];
+                    c364.push(data);
+                }
+
+                var c365 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[15];
+                    c365.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[15];
+                    c365.push(data);
+                }
+
+                var c366 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[16];
+                    c366.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[16];
+                    c366.push(data);
+                }
+
+                var c367 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[17];
+                    c367.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[17];
+                    c367.push(data);
+                }
+
+                var c368 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[18];
+                    c368.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[18];
+                    c368.push(data);
+                }
+
+                var c369 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[19];
+                    c369.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[19];
+                    c369.push(data);
+                }
+
+                var c370 = [];
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-A<br>C#' + ' ' + counters[20];
+                    c370.push(data);
+                }
+                for (i = 0; i < day.length; i++){
+                    let data = month_n + '-' + day[i] + '-B<br>C#' + ' ' + counters[20];
+                    c370.push(data);
+                }
+                
+                //iterate to html
+                for (i = 0; i < c350.length; i++){
+                    td[i].innerHTML = c350[i];
+                }
+                
+                var td2 = document.getElementsByClassName("td2");
+                for (i = 0; i < c351.length; i++){
+                    td2[i].innerHTML = c351[i];
+                }
+
+                var td3 = document.getElementsByClassName("td3");
+                for (i = 0; i < c353.length; i++){
+                    td3[i].innerHTML = c352[i];
+                }
+                
+                var td4 = document.getElementsByClassName("td4");
+                for (i = 0; i < c353.length; i++){
+                    td4[i].innerHTML = c353[i];
+                }
+                
+                var td5 = document.getElementsByClassName("td5");
+                for (i = 0; i < c353.length; i++){
+                    td5[i].innerHTML = c354[i];
+                }
+
+                var td6 = document.getElementsByClassName("td6");
+                for (i = 0; i < c353.length; i++){
+                    td6[i].innerHTML = c355[i];
+                }
+
+                var td7 = document.getElementsByClassName("td7");
+                for (i = 0; i < c353.length; i++){
+                    td7[i].innerHTML = c356[i];
+                }
+
+                var td8 = document.getElementsByClassName("td8");
+                for (i = 0; i < c353.length; i++){
+                    td8[i].innerHTML = c357[i];
+                }
+
+                var td9 = document.getElementsByClassName("td9");
+                for (i = 0; i < c353.length; i++){
+                    td9[i].innerHTML = c358[i];
+                }
+
+                var td10 = document.getElementsByClassName("td10");
+                for (i = 0; i < c353.length; i++){
+                    td10[i].innerHTML = c359[i];
+                }
+
+                var td11 = document.getElementsByClassName("td11");
+                for (i = 0; i < c353.length; i++){
+                    td11[i].innerHTML = c360[i];
+                }
+
+                var td12 = document.getElementsByClassName("td12");
+                for (i = 0; i < c353.length; i++){
+                    td12[i].innerHTML = c361[i];
+                }
+
+                var td13 = document.getElementsByClassName("td13");
+                for (i = 0; i < c353.length; i++){
+                    td13[i].innerHTML = c362[i];
+                }
+
+                var td14 = document.getElementsByClassName("td14");
+                for (i = 0; i < c353.length; i++){
+                    td14[i].innerHTML = c363[i];
+                }
+
+                var td15 = document.getElementsByClassName("td15");
+                for (i = 0; i < c353.length; i++){
+                    td15[i].innerHTML = c364[i];
+                }
+
+                var td16 = document.getElementsByClassName("td16");
+                for (i = 0; i < c353.length; i++){
+                    td16[i].innerHTML = c365[i];
+                }
+
+                var td17 = document.getElementsByClassName("td17");
+                for (i = 0; i < c353.length; i++){
+                    td17[i].innerHTML = c366[i];
+                }
+
+                var td18 = document.getElementsByClassName("td18");
+                for (i = 0; i < c353.length; i++){
+                    td18[i].innerHTML = c367[i];
+                }
+
+                var td19 = document.getElementsByClassName("td19");
+                for (i = 0; i < c353.length; i++){
+                    td19[i].innerHTML = c368[i];
+                }
+
+                var td20 = document.getElementsByClassName("td20");
+                for (i = 0; i < c353.length; i++){
+                    td20[i].innerHTML = c369[i];
+                }
+
+                var td21 = document.getElementsByClassName("td21");
+                for (i = 0; i < c353.length; i++){
+                    td21[i].innerHTML = c370[i];
+                }
+        }
+
+        else if (month_n == 0){
+            alert('Please select Month in Calendar to Show All data.');
+            location.reload();
+        }
+
+        else if (sel_bycounter != 'Counter'){
+            alert('Please do not select Counter or Group Counters to Show All data.');
+            location.reload();
+        }
+        else if (counter_sel != ''){
+            alert('Please do not select Counter or Group Counters to Show All data.');
+            location.reload();
+        }
+    }
+            
+    
+      
+      
+    </script>
+    <style>
+        table{
+            width: 1000px;
+            margin-bottom: 20px;
+            margin-left: auto;
+            margin-right: auto;     
+        }
+        table, tr, td{
+            border: 1px solid #f6f7fd;
+            border-collapse: collapse;
+            background-color: white;
+        }
+        td{
+            color: rgb(121, 118, 155);
+            width: 200px;
+            height: 55px;
+            padding: 1px;
+            text-align:center;
+            font-size: 17px;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+       
+        }
+
+        @media print {
+            .nav, .setting_group{
+                display: none;
+            }
+            *, body{
+                color: rgb(0, 0, 0);
+            }
+            td{
+                width: 200px;
+                height: 110px;
+                padding: 2px;
+                text-align:center;
+                font-size: 45px;
+                text-align: center;
+                font-weight: bold;  
+            }
+            .group_five, table {
+                width: 100%;
+                margin: 0;
+            }
+            table, tr, td{
+                border: 1px solid #c9c9c9;
+                border-collapse: collapse;
+            }
+            
+            
+        }
+    </style>
+</body>
+    
+</html>
